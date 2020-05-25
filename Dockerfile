@@ -11,13 +11,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
                        curl \
                        wget \
                        unzip \
-                       tzdata \
- && curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
- && mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg \
- && wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+                       tzdata 
+RUN DEBIAN_FRONTEND=noninteractive curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
+ && mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg 
+RUN DEBIAN_FRONTEND=noninteractive wget https://packages.microsoft.com/config/ubuntu/19.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
  && wget https://packages.microsoft.com/config/ubuntu/19.10/prod.list \
- && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list \
- && chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
+ && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list 
+RUN DEBIAN_FRONTEND=noninteractive chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
  && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
  && sudo dpkg -i packages-microsoft-prod.deb 
 # && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list' \
