@@ -19,9 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive wget https://packages.microsoft.com/config/ub
 RUN DEBIAN_FRONTEND=noninteractive wget https://packages.microsoft.com/config/ubuntu/19.10/prod.list \
  && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list 
 RUN DEBIAN_FRONTEND=noninteractive chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
- && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
-  
-# && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list' \
+ && chown root:root /etc/apt/sources.list.d/microsoft-prod.list 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y apt-transport-https
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y dotnet-sdk-3.1
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y aspnetcore-runtime-3.1
